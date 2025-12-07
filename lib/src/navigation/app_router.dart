@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../injection/injection.dart';
+import '../presentation/bookmarks_page/bloc/bookmarks_bloc.dart';
 import '../presentation/bookmarks_page/bookmarks_view.dart';
 import '../presentation/details_page/bloc/details_bloc.dart';
 import '../presentation/details_page/details_view.dart';
@@ -16,7 +17,15 @@ final GoRouter appRouter = GoRouter(
   routes: <RouteBase>[
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
-        return MainNavigationView(child: child);
+        return BlocProvider<BookmarksBloc>(
+          create: (BuildContext context) {
+            final BookmarksBloc bloc = getIt<BookmarksBloc>();
+            // Load bookmarks when the app starts
+            bloc.add(const BookmarksEvent.loadBookmarks());
+            return bloc;
+          },
+          child: MainNavigationView(child: child),
+        );
       },
       routes: <RouteBase>[
         GoRoute(
@@ -43,6 +52,10 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/bookmarks',
           builder: (BuildContext context, GoRouterState state) {
+            // Reload bookmarks when navigating to bookmarks page
+            context.read<BookmarksBloc>().add(
+              const BookmarksEvent.loadBookmarks(),
+            );
             return const BookmarksView();
           },
         ),

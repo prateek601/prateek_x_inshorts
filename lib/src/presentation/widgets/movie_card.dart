@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/movie_response.dart';
+import '../bookmarks_page/bloc/bookmarks_bloc.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({super.key, required this.movie, this.onTap});
+  const MovieCard({
+    super.key,
+    required this.movie,
+    this.onTap,
+    this.showBookmarkButton = true,
+  });
 
   final Movie movie;
   final VoidCallback? onTap;
+  final bool showBookmarkButton;
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +70,50 @@ class MovieCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      movie.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            movie.title,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (showBookmarkButton)
+                          BlocBuilder<BookmarksBloc, BookmarksState>(
+                            builder: (BuildContext context, BookmarksState state) {
+                              final bool isBookmarked =
+                                  state.bookmarkStatus[movie.id] ?? false;
+                              return IconButton(
+                                icon: Icon(
+                                  isBookmarked
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_border,
+                                  color: isBookmarked ? Colors.amber : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  if (isBookmarked) {
+                                    context.read<BookmarksBloc>().add(
+                                          BookmarksEvent.removeBookmark(movie.id),
+                                        );
+                                  } else {
+                                    context.read<BookmarksBloc>().add(
+                                          BookmarksEvent.addBookmark(movie),
+                                        );
+                                  }
+                                },
+                                tooltip: isBookmarked
+                                    ? 'Remove bookmark'
+                                    : 'Add bookmark',
+                              );
+                            },
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 8),
                     Row(

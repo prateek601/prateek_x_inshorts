@@ -12,6 +12,331 @@ part of 'search_bloc.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
+mixin _$SearchEvent {
+
+ String get query;
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SearchEventCopyWith<SearchEvent> get copyWith => _$SearchEventCopyWithImpl<SearchEvent>(this as SearchEvent, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchEvent&&(identical(other.query, query) || other.query == query));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query);
+
+@override
+String toString() {
+  return 'SearchEvent(query: $query)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SearchEventCopyWith<$Res>  {
+  factory $SearchEventCopyWith(SearchEvent value, $Res Function(SearchEvent) _then) = _$SearchEventCopyWithImpl;
+@useResult
+$Res call({
+ String query
+});
+
+
+
+
+}
+/// @nodoc
+class _$SearchEventCopyWithImpl<$Res>
+    implements $SearchEventCopyWith<$Res> {
+  _$SearchEventCopyWithImpl(this._self, this._then);
+
+  final SearchEvent _self;
+  final $Res Function(SearchEvent) _then;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? query = null,}) {
+  return _then(_self.copyWith(
+query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SearchEvent].
+extension SearchEventPatterns on SearchEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SearchQueryChanged value)?  searchQueryChanged,TResult Function( _SearchMovies value)?  searchMovies,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SearchQueryChanged value)  searchQueryChanged,required TResult Function( _SearchMovies value)  searchMovies,}){
+final _that = this;
+switch (_that) {
+case _SearchQueryChanged():
+return searchQueryChanged(_that);case _SearchMovies():
+return searchMovies(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SearchQueryChanged value)?  searchQueryChanged,TResult? Function( _SearchMovies value)?  searchMovies,}){
+final _that = this;
+switch (_that) {
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String query)?  searchQueryChanged,TResult Function( String query,  int page)?  searchMovies,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that.query);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that.query,_that.page);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String query)  searchQueryChanged,required TResult Function( String query,  int page)  searchMovies,}) {final _that = this;
+switch (_that) {
+case _SearchQueryChanged():
+return searchQueryChanged(_that.query);case _SearchMovies():
+return searchMovies(_that.query,_that.page);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String query)?  searchQueryChanged,TResult? Function( String query,  int page)?  searchMovies,}) {final _that = this;
+switch (_that) {
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that.query);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that.query,_that.page);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _SearchQueryChanged implements SearchEvent {
+  const _SearchQueryChanged(this.query);
+  
+
+@override final  String query;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SearchQueryChangedCopyWith<_SearchQueryChanged> get copyWith => __$SearchQueryChangedCopyWithImpl<_SearchQueryChanged>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchQueryChanged&&(identical(other.query, query) || other.query == query));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query);
+
+@override
+String toString() {
+  return 'SearchEvent.searchQueryChanged(query: $query)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SearchQueryChangedCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
+  factory _$SearchQueryChangedCopyWith(_SearchQueryChanged value, $Res Function(_SearchQueryChanged) _then) = __$SearchQueryChangedCopyWithImpl;
+@override @useResult
+$Res call({
+ String query
+});
+
+
+
+
+}
+/// @nodoc
+class __$SearchQueryChangedCopyWithImpl<$Res>
+    implements _$SearchQueryChangedCopyWith<$Res> {
+  __$SearchQueryChangedCopyWithImpl(this._self, this._then);
+
+  final _SearchQueryChanged _self;
+  final $Res Function(_SearchQueryChanged) _then;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
+  return _then(_SearchQueryChanged(
+null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _SearchMovies implements SearchEvent {
+  const _SearchMovies({required this.query, this.page = 1});
+  
+
+@override final  String query;
+@JsonKey() final  int page;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SearchMoviesCopyWith<_SearchMovies> get copyWith => __$SearchMoviesCopyWithImpl<_SearchMovies>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovies&&(identical(other.query, query) || other.query == query)&&(identical(other.page, page) || other.page == page));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query,page);
+
+@override
+String toString() {
+  return 'SearchEvent.searchMovies(query: $query, page: $page)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SearchMoviesCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
+  factory _$SearchMoviesCopyWith(_SearchMovies value, $Res Function(_SearchMovies) _then) = __$SearchMoviesCopyWithImpl;
+@override @useResult
+$Res call({
+ String query, int page
+});
+
+
+
+
+}
+/// @nodoc
+class __$SearchMoviesCopyWithImpl<$Res>
+    implements _$SearchMoviesCopyWith<$Res> {
+  __$SearchMoviesCopyWithImpl(this._self, this._then);
+
+  final _SearchMovies _self;
+  final $Res Function(_SearchMovies) _then;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? query = null,Object? page = null,}) {
+  return _then(_SearchMovies(
+query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$SearchState {
 
  String get query; List<Movie> get movies; int get currentPage; bool get hasMore; bool get isLoadingMore; SearchProgressState get progressState;
@@ -629,331 +954,6 @@ class __$ErrorCopyWithImpl<$Res>
   return _then(_Error(
 message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,
-  ));
-}
-
-
-}
-
-/// @nodoc
-mixin _$SearchEvent {
-
- String get query;
-/// Create a copy of SearchEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$SearchEventCopyWith<SearchEvent> get copyWith => _$SearchEventCopyWithImpl<SearchEvent>(this as SearchEvent, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchEvent&&(identical(other.query, query) || other.query == query));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,query);
-
-@override
-String toString() {
-  return 'SearchEvent(query: $query)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class $SearchEventCopyWith<$Res>  {
-  factory $SearchEventCopyWith(SearchEvent value, $Res Function(SearchEvent) _then) = _$SearchEventCopyWithImpl;
-@useResult
-$Res call({
- String query
-});
-
-
-
-
-}
-/// @nodoc
-class _$SearchEventCopyWithImpl<$Res>
-    implements $SearchEventCopyWith<$Res> {
-  _$SearchEventCopyWithImpl(this._self, this._then);
-
-  final SearchEvent _self;
-  final $Res Function(SearchEvent) _then;
-
-/// Create a copy of SearchEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? query = null,}) {
-  return _then(_self.copyWith(
-query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-}
-
-
-/// Adds pattern-matching-related methods to [SearchEvent].
-extension SearchEventPatterns on SearchEvent {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SearchQueryChanged value)?  searchQueryChanged,TResult Function( _SearchMovies value)?  searchMovies,required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _SearchQueryChanged() when searchQueryChanged != null:
-return searchQueryChanged(_that);case _SearchMovies() when searchMovies != null:
-return searchMovies(_that);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SearchQueryChanged value)  searchQueryChanged,required TResult Function( _SearchMovies value)  searchMovies,}){
-final _that = this;
-switch (_that) {
-case _SearchQueryChanged():
-return searchQueryChanged(_that);case _SearchMovies():
-return searchMovies(_that);}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SearchQueryChanged value)?  searchQueryChanged,TResult? Function( _SearchMovies value)?  searchMovies,}){
-final _that = this;
-switch (_that) {
-case _SearchQueryChanged() when searchQueryChanged != null:
-return searchQueryChanged(_that);case _SearchMovies() when searchMovies != null:
-return searchMovies(_that);case _:
-  return null;
-
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
-
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String query)?  searchQueryChanged,TResult Function( String query,  int page)?  searchMovies,required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _SearchQueryChanged() when searchQueryChanged != null:
-return searchQueryChanged(_that.query);case _SearchMovies() when searchMovies != null:
-return searchMovies(_that.query,_that.page);case _:
-  return orElse();
-
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
-
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String query)  searchQueryChanged,required TResult Function( String query,  int page)  searchMovies,}) {final _that = this;
-switch (_that) {
-case _SearchQueryChanged():
-return searchQueryChanged(_that.query);case _SearchMovies():
-return searchMovies(_that.query,_that.page);}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
-
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String query)?  searchQueryChanged,TResult? Function( String query,  int page)?  searchMovies,}) {final _that = this;
-switch (_that) {
-case _SearchQueryChanged() when searchQueryChanged != null:
-return searchQueryChanged(_that.query);case _SearchMovies() when searchMovies != null:
-return searchMovies(_that.query,_that.page);case _:
-  return null;
-
-}
-}
-
-}
-
-/// @nodoc
-
-
-class _SearchQueryChanged implements SearchEvent {
-  const _SearchQueryChanged(this.query);
-  
-
-@override final  String query;
-
-/// Create a copy of SearchEvent
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SearchQueryChangedCopyWith<_SearchQueryChanged> get copyWith => __$SearchQueryChangedCopyWithImpl<_SearchQueryChanged>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchQueryChanged&&(identical(other.query, query) || other.query == query));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,query);
-
-@override
-String toString() {
-  return 'SearchEvent.searchQueryChanged(query: $query)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$SearchQueryChangedCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
-  factory _$SearchQueryChangedCopyWith(_SearchQueryChanged value, $Res Function(_SearchQueryChanged) _then) = __$SearchQueryChangedCopyWithImpl;
-@override @useResult
-$Res call({
- String query
-});
-
-
-
-
-}
-/// @nodoc
-class __$SearchQueryChangedCopyWithImpl<$Res>
-    implements _$SearchQueryChangedCopyWith<$Res> {
-  __$SearchQueryChangedCopyWithImpl(this._self, this._then);
-
-  final _SearchQueryChanged _self;
-  final $Res Function(_SearchQueryChanged) _then;
-
-/// Create a copy of SearchEvent
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
-  return _then(_SearchQueryChanged(
-null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class _SearchMovies implements SearchEvent {
-  const _SearchMovies({required this.query, this.page = 1});
-  
-
-@override final  String query;
-@JsonKey() final  int page;
-
-/// Create a copy of SearchEvent
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$SearchMoviesCopyWith<_SearchMovies> get copyWith => __$SearchMoviesCopyWithImpl<_SearchMovies>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovies&&(identical(other.query, query) || other.query == query)&&(identical(other.page, page) || other.page == page));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,query,page);
-
-@override
-String toString() {
-  return 'SearchEvent.searchMovies(query: $query, page: $page)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$SearchMoviesCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
-  factory _$SearchMoviesCopyWith(_SearchMovies value, $Res Function(_SearchMovies) _then) = __$SearchMoviesCopyWithImpl;
-@override @useResult
-$Res call({
- String query, int page
-});
-
-
-
-
-}
-/// @nodoc
-class __$SearchMoviesCopyWithImpl<$Res>
-    implements _$SearchMoviesCopyWith<$Res> {
-  __$SearchMoviesCopyWithImpl(this._self, this._then);
-
-  final _SearchMovies _self;
-  final $Res Function(_SearchMovies) _then;
-
-/// Create a copy of SearchEvent
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? query = null,Object? page = null,}) {
-  return _then(_SearchMovies(
-query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
-as String,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int,
   ));
 }
 

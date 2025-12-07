@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../domain/repository/bookmarks_repository.dart';
+import '../domain/repository/bookmarks_repository_impl.dart';
 import '../domain/repository/movie_repository.dart';
 import '../domain/repository/movie_repository_impl.dart';
+import '../presentation/bookmarks_page/bloc/bookmarks_bloc.dart';
 import '../presentation/details_page/bloc/details_bloc.dart';
 import '../presentation/home_page/bloc/home_bloc.dart';
 import '../presentation/search_page/bloc/search_bloc.dart';
@@ -10,10 +13,14 @@ import '../utils/api_client/api/dio/api_client.dart';
 import '../utils/api_client/api/dio/dio_builder.dart';
 import '../utils/api_client/utils/connectivity_interceptor.dart';
 import '../utils/api_client/utils/logging_interceptor.dart';
+import '../utils/storage/storage.dart';
 
 final GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
+  // Initialize Hive storage
+  await HiveStorage.initialize();
+
   // Dio
   getIt.registerLazySingleton<Dio>(() {
     return DioBuilder()
@@ -42,12 +49,18 @@ Future<void> init() async {
     () => MovieRepositoryImpl(getIt<ApiClient>()),
   );
 
+  // Bookmarks Repository
+  getIt.registerLazySingleton<BookmarksRepository>(
+    () => BookmarksRepositoryImpl(),
+  );
+
   // Blocs
   getIt.registerFactory<HomeBloc>(() => HomeBloc(getIt<MovieRepository>()));
   getIt.registerFactory<DetailsBloc>(
     () => DetailsBloc(getIt<MovieRepository>()),
   );
-  getIt.registerFactory<SearchBloc>(
-    () => SearchBloc(getIt<MovieRepository>()),
+  getIt.registerFactory<SearchBloc>(() => SearchBloc(getIt<MovieRepository>()));
+  getIt.registerFactory<BookmarksBloc>(
+    () => BookmarksBloc(getIt<BookmarksRepository>()),
   );
 }
