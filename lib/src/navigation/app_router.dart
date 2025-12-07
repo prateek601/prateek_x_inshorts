@@ -9,6 +9,7 @@ import '../presentation/details_page/details_view.dart';
 import '../presentation/home_page/bloc/home_bloc.dart';
 import '../presentation/home_page/home_view.dart';
 import '../presentation/main_navigation/main_navigation_view.dart';
+import '../presentation/search_page/bloc/search_bloc.dart';
 import '../presentation/search_page/search_view.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -33,7 +34,10 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/search',
           builder: (BuildContext context, GoRouterState state) {
-            return const SearchView();
+            return BlocProvider<SearchBloc>(
+              create: (BuildContext context) => getIt<SearchBloc>(),
+              child: const SearchView(),
+            );
           },
         ),
         GoRoute(
@@ -60,4 +64,3 @@ final GoRouter appRouter = GoRouter(
     ),
   ],
 );
-

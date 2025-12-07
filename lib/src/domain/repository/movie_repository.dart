@@ -13,4 +13,8 @@ abstract class MovieRepository {
     required int movieId,
     String language = 'en-US',
   });
+  Future<Either<Exception, MovieResponse>> searchMovies({
+    required String query,
+    int page = 1,
+  });
 }

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SearchState {
 
- int get someValue; SearchProgressState get progressState;
+ String get query; List<Movie> get movies; int get currentPage; bool get hasMore; bool get isLoadingMore; SearchProgressState get progressState;
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SearchStateCopyWith<SearchState> get copyWith => _$SearchStateCopyWithImpl<Sear
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&(identical(other.someValue, someValue) || other.someValue == someValue)&&(identical(other.progressState, progressState) || other.progressState == progressState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other.movies, movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.progressState, progressState) || other.progressState == progressState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,someValue,progressState);
+int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(movies),currentPage,hasMore,isLoadingMore,progressState);
 
 @override
 String toString() {
-  return 'SearchState(someValue: $someValue, progressState: $progressState)';
+  return 'SearchState(query: $query, movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, progressState: $progressState)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SearchStateCopyWith<$Res>  {
   factory $SearchStateCopyWith(SearchState value, $Res Function(SearchState) _then) = _$SearchStateCopyWithImpl;
 @useResult
 $Res call({
- int someValue, SearchProgressState progressState
+ String query, List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, SearchProgressState progressState
 });
 
 
@@ -62,10 +62,14 @@ class _$SearchStateCopyWithImpl<$Res>
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? someValue = null,Object? progressState = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? query = null,Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? progressState = null,}) {
   return _then(_self.copyWith(
-someValue: null == someValue ? _self.someValue : someValue // ignore: cast_nullable_to_non_nullable
-as int,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
+query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,movies: null == movies ? _self.movies : movies // ignore: cast_nullable_to_non_nullable
+as List<Movie>,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as SearchProgressState,
   ));
 }
@@ -157,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int someValue,  SearchProgressState progressState)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  SearchProgressState progressState)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
-return $default(_that.someValue,_that.progressState);case _:
+return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState);case _:
   return orElse();
 
 }
@@ -178,10 +182,10 @@ return $default(_that.someValue,_that.progressState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int someValue,  SearchProgressState progressState)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  SearchProgressState progressState)  $default,) {final _that = this;
 switch (_that) {
 case _SearchState():
-return $default(_that.someValue,_that.progressState);}
+return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +199,10 @@ return $default(_that.someValue,_that.progressState);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int someValue,  SearchProgressState progressState)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  SearchProgressState progressState)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
-return $default(_that.someValue,_that.progressState);case _:
+return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState);case _:
   return null;
 
 }
@@ -210,10 +214,20 @@ return $default(_that.someValue,_that.progressState);case _:
 
 
 class _SearchState implements SearchState {
-  const _SearchState({this.someValue = 0, this.progressState = const SearchProgressState.loading()});
+  const _SearchState({this.query = '', final  List<Movie> movies = const <Movie>[], this.currentPage = 1, this.hasMore = false, this.isLoadingMore = false, this.progressState = const SearchProgressState.idle()}): _movies = movies;
   
 
-@override@JsonKey() final  int someValue;
+@override@JsonKey() final  String query;
+ final  List<Movie> _movies;
+@override@JsonKey() List<Movie> get movies {
+  if (_movies is EqualUnmodifiableListView) return _movies;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_movies);
+}
+
+@override@JsonKey() final  int currentPage;
+@override@JsonKey() final  bool hasMore;
+@override@JsonKey() final  bool isLoadingMore;
 @override@JsonKey() final  SearchProgressState progressState;
 
 /// Create a copy of SearchState
@@ -226,16 +240,16 @@ _$SearchStateCopyWith<_SearchState> get copyWith => __$SearchStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&(identical(other.someValue, someValue) || other.someValue == someValue)&&(identical(other.progressState, progressState) || other.progressState == progressState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.progressState, progressState) || other.progressState == progressState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,someValue,progressState);
+int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(_movies),currentPage,hasMore,isLoadingMore,progressState);
 
 @override
 String toString() {
-  return 'SearchState(someValue: $someValue, progressState: $progressState)';
+  return 'SearchState(query: $query, movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, progressState: $progressState)';
 }
 
 
@@ -246,7 +260,7 @@ abstract mixin class _$SearchStateCopyWith<$Res> implements $SearchStateCopyWith
   factory _$SearchStateCopyWith(_SearchState value, $Res Function(_SearchState) _then) = __$SearchStateCopyWithImpl;
 @override @useResult
 $Res call({
- int someValue, SearchProgressState progressState
+ String query, List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, SearchProgressState progressState
 });
 
 
@@ -263,10 +277,14 @@ class __$SearchStateCopyWithImpl<$Res>
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? someValue = null,Object? progressState = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? query = null,Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? progressState = null,}) {
   return _then(_SearchState(
-someValue: null == someValue ? _self.someValue : someValue // ignore: cast_nullable_to_non_nullable
-as int,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
+query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,movies: null == movies ? _self._movies : movies // ignore: cast_nullable_to_non_nullable
+as List<Movie>,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as SearchProgressState,
   ));
 }
@@ -327,10 +345,11 @@ extension SearchProgressStatePatterns on SearchProgressState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _Error value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Idle value)?  idle,TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Loading() when loading != null:
+case _Idle() when idle != null:
+return idle(_that);case _Loading() when loading != null:
 return loading(_that);case _Loaded() when loaded != null:
 return loaded(_that);case _Error() when error != null:
 return error(_that);case _:
@@ -351,10 +370,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _Error value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Idle value)  idle,required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _Error value)  error,}){
 final _that = this;
 switch (_that) {
-case _Loading():
+case _Idle():
+return idle(_that);case _Loading():
 return loading(_that);case _Loaded():
 return loaded(_that);case _Error():
 return error(_that);}
@@ -371,10 +391,11 @@ return error(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _Error value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Idle value)?  idle,TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _Error value)?  error,}){
 final _that = this;
 switch (_that) {
-case _Loading() when loading != null:
+case _Idle() when idle != null:
+return idle(_that);case _Loading() when loading != null:
 return loading(_that);case _Loaded() when loaded != null:
 return loaded(_that);case _Error() when error != null:
 return error(_that);case _:
@@ -394,9 +415,10 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function()?  loaded,TResult Function( String? message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  idle,TResult Function()?  loading,TResult Function()?  loaded,TResult Function( String? message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Loading() when loading != null:
+case _Idle() when idle != null:
+return idle();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
 return loaded();case _Error() when error != null:
 return error(_that.message);case _:
@@ -417,9 +439,10 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function()  loaded,required TResult Function( String? message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  idle,required TResult Function()  loading,required TResult Function()  loaded,required TResult Function( String? message)  error,}) {final _that = this;
 switch (_that) {
-case _Loading():
+case _Idle():
+return idle();case _Loading():
 return loading();case _Loaded():
 return loaded();case _Error():
 return error(_that.message);}
@@ -436,9 +459,10 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function()?  loaded,TResult? Function( String? message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  idle,TResult? Function()?  loading,TResult? Function()?  loaded,TResult? Function( String? message)?  error,}) {final _that = this;
 switch (_that) {
-case _Loading() when loading != null:
+case _Idle() when idle != null:
+return idle();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
 return loaded();case _Error() when error != null:
 return error(_that.message);case _:
@@ -448,6 +472,38 @@ return error(_that.message);case _:
 }
 
 }
+
+/// @nodoc
+
+
+class _Idle implements SearchProgressState {
+  const _Idle();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Idle);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SearchProgressState.idle()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
@@ -654,11 +710,12 @@ extension SearchEventPatterns on SearchEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Search value)?  search,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SearchQueryChanged value)?  searchQueryChanged,TResult Function( _SearchMovies value)?  searchMovies,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Search() when search != null:
-return search(_that);case _:
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that);case _:
   return orElse();
 
 }
@@ -676,11 +733,12 @@ return search(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Search value)  search,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SearchQueryChanged value)  searchQueryChanged,required TResult Function( _SearchMovies value)  searchMovies,}){
 final _that = this;
 switch (_that) {
-case _Search():
-return search(_that);}
+case _SearchQueryChanged():
+return searchQueryChanged(_that);case _SearchMovies():
+return searchMovies(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -694,11 +752,12 @@ return search(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Search value)?  search,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SearchQueryChanged value)?  searchQueryChanged,TResult? Function( _SearchMovies value)?  searchMovies,}){
 final _that = this;
 switch (_that) {
-case _Search() when search != null:
-return search(_that);case _:
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that);case _:
   return null;
 
 }
@@ -715,10 +774,11 @@ return search(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String query)?  search,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String query)?  searchQueryChanged,TResult Function( String query,  int page)?  searchMovies,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Search() when search != null:
-return search(_that.query);case _:
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that.query);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that.query,_that.page);case _:
   return orElse();
 
 }
@@ -736,10 +796,11 @@ return search(_that.query);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String query)  search,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String query)  searchQueryChanged,required TResult Function( String query,  int page)  searchMovies,}) {final _that = this;
 switch (_that) {
-case _Search():
-return search(_that.query);}
+case _SearchQueryChanged():
+return searchQueryChanged(_that.query);case _SearchMovies():
+return searchMovies(_that.query,_that.page);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -753,10 +814,11 @@ return search(_that.query);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String query)?  search,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String query)?  searchQueryChanged,TResult? Function( String query,  int page)?  searchMovies,}) {final _that = this;
 switch (_that) {
-case _Search() when search != null:
-return search(_that.query);case _:
+case _SearchQueryChanged() when searchQueryChanged != null:
+return searchQueryChanged(_that.query);case _SearchMovies() when searchMovies != null:
+return searchMovies(_that.query,_that.page);case _:
   return null;
 
 }
@@ -767,8 +829,8 @@ return search(_that.query);case _:
 /// @nodoc
 
 
-class _Search implements SearchEvent {
-  const _Search(this.query);
+class _SearchQueryChanged implements SearchEvent {
+  const _SearchQueryChanged(this.query);
   
 
 @override final  String query;
@@ -777,13 +839,13 @@ class _Search implements SearchEvent {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SearchCopyWith<_Search> get copyWith => __$SearchCopyWithImpl<_Search>(this, _$identity);
+_$SearchQueryChangedCopyWith<_SearchQueryChanged> get copyWith => __$SearchQueryChangedCopyWithImpl<_SearchQueryChanged>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Search&&(identical(other.query, query) || other.query == query));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchQueryChanged&&(identical(other.query, query) || other.query == query));
 }
 
 
@@ -792,15 +854,15 @@ int get hashCode => Object.hash(runtimeType,query);
 
 @override
 String toString() {
-  return 'SearchEvent.search(query: $query)';
+  return 'SearchEvent.searchQueryChanged(query: $query)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SearchCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
-  factory _$SearchCopyWith(_Search value, $Res Function(_Search) _then) = __$SearchCopyWithImpl;
+abstract mixin class _$SearchQueryChangedCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
+  factory _$SearchQueryChangedCopyWith(_SearchQueryChanged value, $Res Function(_SearchQueryChanged) _then) = __$SearchQueryChangedCopyWithImpl;
 @override @useResult
 $Res call({
  String query
@@ -811,19 +873,87 @@ $Res call({
 
 }
 /// @nodoc
-class __$SearchCopyWithImpl<$Res>
-    implements _$SearchCopyWith<$Res> {
-  __$SearchCopyWithImpl(this._self, this._then);
+class __$SearchQueryChangedCopyWithImpl<$Res>
+    implements _$SearchQueryChangedCopyWith<$Res> {
+  __$SearchQueryChangedCopyWithImpl(this._self, this._then);
 
-  final _Search _self;
-  final $Res Function(_Search) _then;
+  final _SearchQueryChanged _self;
+  final $Res Function(_SearchQueryChanged) _then;
 
 /// Create a copy of SearchEvent
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? query = null,}) {
-  return _then(_Search(
+  return _then(_SearchQueryChanged(
 null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
 as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _SearchMovies implements SearchEvent {
+  const _SearchMovies({required this.query, this.page = 1});
+  
+
+@override final  String query;
+@JsonKey() final  int page;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SearchMoviesCopyWith<_SearchMovies> get copyWith => __$SearchMoviesCopyWithImpl<_SearchMovies>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchMovies&&(identical(other.query, query) || other.query == query)&&(identical(other.page, page) || other.page == page));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,query,page);
+
+@override
+String toString() {
+  return 'SearchEvent.searchMovies(query: $query, page: $page)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SearchMoviesCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
+  factory _$SearchMoviesCopyWith(_SearchMovies value, $Res Function(_SearchMovies) _then) = __$SearchMoviesCopyWithImpl;
+@override @useResult
+$Res call({
+ String query, int page
+});
+
+
+
+
+}
+/// @nodoc
+class __$SearchMoviesCopyWithImpl<$Res>
+    implements _$SearchMoviesCopyWith<$Res> {
+  __$SearchMoviesCopyWithImpl(this._self, this._then);
+
+  final _SearchMovies _self;
+  final $Res Function(_SearchMovies) _then;
+
+/// Create a copy of SearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? query = null,Object? page = null,}) {
+  return _then(_SearchMovies(
+query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
+as String,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

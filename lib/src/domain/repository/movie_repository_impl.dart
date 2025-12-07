@@ -62,4 +62,22 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(Exception(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Exception, MovieResponse>> searchMovies({
+    required String query,
+    int page = 1,
+  }) async {
+    try {
+      final MovieResponse response = await _apiClient.searchMovies(
+        query: query,
+        page: page,
+      );
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(Exception(e.message ?? 'Network error occurred'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
 }

@@ -24,4 +24,10 @@ abstract class ApiClient {
     @Path('movie_id') required int movieId,
     @Query('language') String language = 'en-US',
   });
+
+  @GET('/search/movie')
+  Future<MovieResponse> searchMovies({
+    @Query('query') required String query,
+    @Query('page') int page = 1,
+  });
 }

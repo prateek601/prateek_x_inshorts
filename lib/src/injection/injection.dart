@@ -5,6 +5,7 @@ import '../domain/repository/movie_repository.dart';
 import '../domain/repository/movie_repository_impl.dart';
 import '../presentation/details_page/bloc/details_bloc.dart';
 import '../presentation/home_page/bloc/home_bloc.dart';
+import '../presentation/search_page/bloc/search_bloc.dart';
 import '../utils/api_client/api/dio/api_client.dart';
 import '../utils/api_client/api/dio/dio_builder.dart';
 import '../utils/api_client/utils/connectivity_interceptor.dart';
@@ -45,5 +46,8 @@ Future<void> init() async {
   getIt.registerFactory<HomeBloc>(() => HomeBloc(getIt<MovieRepository>()));
   getIt.registerFactory<DetailsBloc>(
     () => DetailsBloc(getIt<MovieRepository>()),
+  );
+  getIt.registerFactory<SearchBloc>(
+    () => SearchBloc(getIt<MovieRepository>()),
   );
 }
