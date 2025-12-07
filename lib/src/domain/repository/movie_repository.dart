@@ -1,0 +1,7 @@
+import 'package:fpdart/fpdart.dart';
+
+import '../../data/models/movie_response.dart';
+
+abstract class MovieRepository {
+  Future<Either<Exception, MovieResponse>> getNowPlayingMovies({int page = 1});
+}

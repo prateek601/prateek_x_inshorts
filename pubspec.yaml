@@ -1,0 +1,36 @@
+name: prateek_x_inshorts
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  dio: ^5.9.0
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+  flutter_bloc: ^9.1.1
+  fpdart: ^1.2.0
+  connectivity_plus: ^7.0.0
+  retrofit: ^4.6.0
+  hive: ^2.2.3
+  get_it: ^9.2.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
+  build_runner: ^2.5.4
+  retrofit_generator: ^9.7.0
+
+flutter:
+  uses-material-design: true
