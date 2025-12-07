@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/models/movie_response.dart';
-import '../details_page/details_view.dart';
 import 'bloc/home_bloc.dart';
 
 class HomeView extends StatelessWidget {
@@ -130,13 +130,7 @@ class HomeView extends StatelessWidget {
                   return _MovieCard(
                     movie: movie,
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<DetailsView>(
-                          builder: (BuildContext context) => DetailsView(
-                            movieId: movie.id,
-                          ),
-                        ),
-                      );
+                      context.push('/movie/${movie.id}');
                     },
                   );
                 },
@@ -171,82 +165,85 @@ class _MovieCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-          // Poster
-          if (posterUrl != null)
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(4),
-                bottomLeft: Radius.circular(4),
-              ),
-              child: Image.network(
-                posterUrl,
+            // Poster
+            if (posterUrl != null)
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(4),
+                  bottomLeft: Radius.circular(4),
+                ),
+                child: Image.network(
+                  posterUrl,
+                  width: 100,
+                  height: 150,
+                  fit: BoxFit.cover,
+                  errorBuilder:
+                      (
+                        BuildContext context,
+                        Object error,
+                        StackTrace? stackTrace,
+                      ) => Container(
+                        width: 100,
+                        height: 150,
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.image_not_supported),
+                      ),
+                ),
+              )
+            else
+              Container(
                 width: 100,
                 height: 150,
-                fit: BoxFit.cover,
-                errorBuilder:
-                    (
-                      BuildContext context,
-                      Object error,
-                      StackTrace? stackTrace,
-                    ) => Container(
-                      width: 100,
-                      height: 150,
-                      color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported),
-                    ),
+                color: Colors.grey[300],
+                child: const Icon(Icons.image_not_supported),
               ),
-            )
-          else
-            Container(
-              width: 100,
-              height: 150,
-              color: Colors.grey[300],
-              child: const Icon(Icons.image_not_supported),
-            ),
-          // Movie details
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    movie.title,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: <Widget>[
-                      const Icon(Icons.star, color: Colors.amber, size: 16),
-                      const SizedBox(width: 4),
-                      Text(
-                        movie.voteAverage.toStringAsFixed(1),
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        movie.releaseDate,
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  if (movie.overview.isNotEmpty)
+            // Movie details
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
                     Text(
-                      movie.overview,
-                      style: TextStyle(fontSize: 12, color: Colors.grey[700]),
-                      maxLines: 3,
+                      movie.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                ],
+                    const SizedBox(height: 8),
+                    Row(
+                      children: <Widget>[
+                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                        const SizedBox(width: 4),
+                        Text(
+                          movie.voteAverage.toStringAsFixed(1),
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        const SizedBox(width: 16),
+                        Text(
+                          movie.releaseDate,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    if (movie.overview.isNotEmpty)
+                      Text(
+                        movie.overview,
+                        style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
           ],
         ),
       ),
