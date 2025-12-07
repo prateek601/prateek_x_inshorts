@@ -89,6 +89,9 @@ class _MovieDetailsContent extends StatelessWidget {
         SliverAppBar(
           expandedHeight: 300,
           pinned: true,
+          backgroundColor: Colors.black.withValues(alpha: 0.5),
+          iconTheme: const IconThemeData(color: Colors.white),
+          actionsIconTheme: const IconThemeData(color: Colors.white),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.share),
@@ -97,7 +100,9 @@ class _MovieDetailsContent extends StatelessWidget {
             ),
           ],
           flexibleSpace: FlexibleSpaceBar(
-            background:
+            background: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
                 backdropUrl != null
                     ? Image.network(
                       backdropUrl,
@@ -116,6 +121,23 @@ class _MovieDetailsContent extends StatelessWidget {
                       color: Colors.grey[300],
                       child: const Icon(Icons.image_not_supported),
                     ),
+                // Dark gradient overlay to improve icon visibility
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: <Color>[
+                        Colors.black.withValues(alpha: 0.7),
+                        Colors.black.withValues(alpha: 0.3),
+                        Colors.transparent,
+                      ],
+                      stops: const <double>[0.0, 0.3, 1.0],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         SliverToBoxAdapter(
