@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MovieResponse {
 
- MovieDates get dates; int get page; List<Movie> get results;@JsonKey(name: 'total_pages') int get totalPages;@JsonKey(name: 'total_results') int get totalResults;
+ MovieDates? get dates; int get page; List<Movie> get results;@JsonKey(name: 'total_pages') int get totalPages;@JsonKey(name: 'total_results') int get totalResults;
 /// Create a copy of MovieResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,11 +48,11 @@ abstract mixin class $MovieResponseCopyWith<$Res>  {
   factory $MovieResponseCopyWith(MovieResponse value, $Res Function(MovieResponse) _then) = _$MovieResponseCopyWithImpl;
 @useResult
 $Res call({
- MovieDates dates, int page, List<Movie> results,@JsonKey(name: 'total_pages') int totalPages,@JsonKey(name: 'total_results') int totalResults
+ MovieDates? dates, int page, List<Movie> results,@JsonKey(name: 'total_pages') int totalPages,@JsonKey(name: 'total_results') int totalResults
 });
 
 
-$MovieDatesCopyWith<$Res> get dates;
+$MovieDatesCopyWith<$Res>? get dates;
 
 }
 /// @nodoc
@@ -65,10 +65,10 @@ class _$MovieResponseCopyWithImpl<$Res>
 
 /// Create a copy of MovieResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dates = null,Object? page = null,Object? results = null,Object? totalPages = null,Object? totalResults = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dates = freezed,Object? page = null,Object? results = null,Object? totalPages = null,Object? totalResults = null,}) {
   return _then(_self.copyWith(
-dates: null == dates ? _self.dates : dates // ignore: cast_nullable_to_non_nullable
-as MovieDates,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+dates: freezed == dates ? _self.dates : dates // ignore: cast_nullable_to_non_nullable
+as MovieDates?,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,results: null == results ? _self.results : results // ignore: cast_nullable_to_non_nullable
 as List<Movie>,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
 as int,totalResults: null == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
@@ -79,9 +79,12 @@ as int,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MovieDatesCopyWith<$Res> get dates {
-  
-  return $MovieDatesCopyWith<$Res>(_self.dates, (value) {
+$MovieDatesCopyWith<$Res>? get dates {
+    if (_self.dates == null) {
+    return null;
+  }
+
+  return $MovieDatesCopyWith<$Res>(_self.dates!, (value) {
     return _then(_self.copyWith(dates: value));
   });
 }
@@ -166,7 +169,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MovieDates dates,  int page,  List<Movie> results, @JsonKey(name: 'total_pages')  int totalPages, @JsonKey(name: 'total_results')  int totalResults)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MovieDates? dates,  int page,  List<Movie> results, @JsonKey(name: 'total_pages')  int totalPages, @JsonKey(name: 'total_results')  int totalResults)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MovieResponse() when $default != null:
 return $default(_that.dates,_that.page,_that.results,_that.totalPages,_that.totalResults);case _:
@@ -187,7 +190,7 @@ return $default(_that.dates,_that.page,_that.results,_that.totalPages,_that.tota
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MovieDates dates,  int page,  List<Movie> results, @JsonKey(name: 'total_pages')  int totalPages, @JsonKey(name: 'total_results')  int totalResults)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MovieDates? dates,  int page,  List<Movie> results, @JsonKey(name: 'total_pages')  int totalPages, @JsonKey(name: 'total_results')  int totalResults)  $default,) {final _that = this;
 switch (_that) {
 case _MovieResponse():
 return $default(_that.dates,_that.page,_that.results,_that.totalPages,_that.totalResults);case _:
@@ -207,7 +210,7 @@ return $default(_that.dates,_that.page,_that.results,_that.totalPages,_that.tota
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MovieDates dates,  int page,  List<Movie> results, @JsonKey(name: 'total_pages')  int totalPages, @JsonKey(name: 'total_results')  int totalResults)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MovieDates? dates,  int page,  List<Movie> results, @JsonKey(name: 'total_pages')  int totalPages, @JsonKey(name: 'total_results')  int totalResults)?  $default,) {final _that = this;
 switch (_that) {
 case _MovieResponse() when $default != null:
 return $default(_that.dates,_that.page,_that.results,_that.totalPages,_that.totalResults);case _:
@@ -222,10 +225,10 @@ return $default(_that.dates,_that.page,_that.results,_that.totalPages,_that.tota
 @JsonSerializable()
 
 class _MovieResponse implements MovieResponse {
-  const _MovieResponse({required this.dates, required this.page, required final  List<Movie> results, @JsonKey(name: 'total_pages') required this.totalPages, @JsonKey(name: 'total_results') required this.totalResults}): _results = results;
+  const _MovieResponse({this.dates, required this.page, required final  List<Movie> results, @JsonKey(name: 'total_pages') required this.totalPages, @JsonKey(name: 'total_results') required this.totalResults}): _results = results;
   factory _MovieResponse.fromJson(Map<String, dynamic> json) => _$MovieResponseFromJson(json);
 
-@override final  MovieDates dates;
+@override final  MovieDates? dates;
 @override final  int page;
  final  List<Movie> _results;
 @override List<Movie> get results {
@@ -270,11 +273,11 @@ abstract mixin class _$MovieResponseCopyWith<$Res> implements $MovieResponseCopy
   factory _$MovieResponseCopyWith(_MovieResponse value, $Res Function(_MovieResponse) _then) = __$MovieResponseCopyWithImpl;
 @override @useResult
 $Res call({
- MovieDates dates, int page, List<Movie> results,@JsonKey(name: 'total_pages') int totalPages,@JsonKey(name: 'total_results') int totalResults
+ MovieDates? dates, int page, List<Movie> results,@JsonKey(name: 'total_pages') int totalPages,@JsonKey(name: 'total_results') int totalResults
 });
 
 
-@override $MovieDatesCopyWith<$Res> get dates;
+@override $MovieDatesCopyWith<$Res>? get dates;
 
 }
 /// @nodoc
@@ -287,10 +290,10 @@ class __$MovieResponseCopyWithImpl<$Res>
 
 /// Create a copy of MovieResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dates = null,Object? page = null,Object? results = null,Object? totalPages = null,Object? totalResults = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dates = freezed,Object? page = null,Object? results = null,Object? totalPages = null,Object? totalResults = null,}) {
   return _then(_MovieResponse(
-dates: null == dates ? _self.dates : dates // ignore: cast_nullable_to_non_nullable
-as MovieDates,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+dates: freezed == dates ? _self.dates : dates // ignore: cast_nullable_to_non_nullable
+as MovieDates?,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,results: null == results ? _self._results : results // ignore: cast_nullable_to_non_nullable
 as List<Movie>,totalPages: null == totalPages ? _self.totalPages : totalPages // ignore: cast_nullable_to_non_nullable
 as int,totalResults: null == totalResults ? _self.totalResults : totalResults // ignore: cast_nullable_to_non_nullable
@@ -302,9 +305,12 @@ as int,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$MovieDatesCopyWith<$Res> get dates {
-  
-  return $MovieDatesCopyWith<$Res>(_self.dates, (value) {
+$MovieDatesCopyWith<$Res>? get dates {
+    if (_self.dates == null) {
+    return null;
+  }
+
+  return $MovieDatesCopyWith<$Res>(_self.dates!, (value) {
     return _then(_self.copyWith(dates: value));
   });
 }

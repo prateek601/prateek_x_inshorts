@@ -8,7 +8,14 @@ sealed class HomeState with _$HomeState {
     @Default(false) bool hasMore,
     @Default(false) bool isLoadingMore,
     @Default(HomeProgressState.loading()) HomeProgressState progressState,
+    @Default(MovieType.nowPlaying()) MovieType movieType,
   }) = _HomeState;
+}
+
+@freezed
+sealed class MovieType with _$MovieType {
+  const factory MovieType.nowPlaying() = _NowPlaying;
+  const factory MovieType.trending() = _Trending;
 }
 
 @freezed

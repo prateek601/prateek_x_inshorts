@@ -8,7 +8,7 @@ part 'movie_response.g.dart';
 @freezed
 abstract class MovieResponse with _$MovieResponse {
   const factory MovieResponse({
-    required MovieDates dates,
+    MovieDates? dates,
     required int page,
     required List<Movie> results,
     @JsonKey(name: 'total_pages') required int totalPages,

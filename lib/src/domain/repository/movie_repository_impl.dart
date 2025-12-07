@@ -25,4 +25,22 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(Exception(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Exception, MovieResponse>> getTrendingMovies({
+    String timeWindow = 'day',
+    int page = 1,
+  }) async {
+    try {
+      final MovieResponse response = await _apiClient.getTrendingMovies(
+        timeWindow: timeWindow,
+        page: page,
+      );
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(Exception(e.message ?? 'Network error occurred'));
+    } catch (e) {
+      return Left(Exception(e.toString()));
+    }
+  }
 }
