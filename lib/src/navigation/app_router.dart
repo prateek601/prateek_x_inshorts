@@ -40,8 +40,15 @@ final GoRouter appRouter = GoRouter(
     // Parse the deep link
     final int? movieId = DeepLinkService.parseMovieIdFromDeepLink(urlToCheck);
     if (movieId != null) {
-      // Return the path that go_router can handle
-      return '/movie/$movieId';
+      // Store the movie ID to navigate after home loads
+      // Use a post-frame callback to push the movie details on top of home
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // Push the movie details on top of the current route
+        // This ensures home is in the stack when opening from deep link
+        appRouter.push('/movie/$movieId');
+      });
+      // Return home first so it's in the stack, then we'll push movie details
+      return '/';
     }
 
     // For normal paths, return null to proceed normally
