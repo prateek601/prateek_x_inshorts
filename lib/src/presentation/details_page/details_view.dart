@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../data/models/movie_details.dart';
 import '../../injection/injection.dart';
+import '../../utils/deep_link/deep_link_service.dart';
 import 'bloc/details_bloc.dart';
 
 class DetailsView extends StatelessWidget {
@@ -87,6 +89,13 @@ class _MovieDetailsContent extends StatelessWidget {
         SliverAppBar(
           expandedHeight: 300,
           pinned: true,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.share),
+              onPressed: () => _shareMovie(context, movieDetails),
+              tooltip: 'Share movie',
+            ),
+          ],
           flexibleSpace: FlexibleSpaceBar(
             background:
                 backdropUrl != null
@@ -285,6 +294,16 @@ class _MovieDetailsContent extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Future<void> _shareMovie(BuildContext context, MovieDetails movieDetails) async {
+    final String deepLink = DeepLinkService.generateMovieDeepLink(movieDetails.id);
+    final String shareText = 'Check out this movie: ${movieDetails.title}\n\n$deepLink';
+    
+    await Share.share(
+      shareText,
+      subject: 'Movie: ${movieDetails.title}',
     );
   }
 }

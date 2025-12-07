@@ -12,8 +12,75 @@ import '../presentation/home_page/home_view.dart';
 import '../presentation/main_navigation/main_navigation_view.dart';
 import '../presentation/search_page/bloc/search_bloc.dart';
 import '../presentation/search_page/search_view.dart';
+import '../utils/deep_link/deep_link_service.dart';
 
 final GoRouter appRouter = GoRouter(
+  initialLocation: '/',
+  redirect: (BuildContext context, GoRouterState state) {
+    // Handle deep link URLs by extracting the path
+    // Check the full URI string - this is what iOS/Android pass when opening from a deep link
+    final String location = state.uri.toString();
+    final String matchedLocation = state.matchedLocation;
+
+    // Check if it's a deep link URL
+    // The location might be the full URL like "prateekxinshorts://movie/123"
+    String? urlToCheck;
+
+    if (location.isNotEmpty &&
+        location.contains('${DeepLinkService.scheme}://')) {
+      urlToCheck = location;
+    } else if (matchedLocation.isNotEmpty &&
+        matchedLocation.contains('${DeepLinkService.scheme}://')) {
+      urlToCheck = matchedLocation;
+    } else {
+      // For normal paths, return null to proceed normally
+      return null;
+    }
+
+    // Parse the deep link
+    final int? movieId = DeepLinkService.parseMovieIdFromDeepLink(urlToCheck);
+    if (movieId != null) {
+      // Return the path that go_router can handle
+      return '/movie/$movieId';
+    }
+
+    // For normal paths, return null to proceed normally
+    return null;
+  },
+  errorBuilder: (BuildContext context, GoRouterState state) {
+    // Handle errors - if it's a deep link URL, try to parse it
+    final String location = state.uri.toString();
+    final int? movieId = DeepLinkService.parseMovieIdFromDeepLink(location);
+    if (movieId != null) {
+      // Redirect to the movie page
+      return BlocProvider<DetailsBloc>(
+        create:
+            (BuildContext context) =>
+                getIt<DetailsBloc>()
+                  ..add(DetailsEvent.fetchDetails(movieId: movieId)),
+        child: DetailsView(movieId: movieId),
+      );
+    }
+
+    // Default error page
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Icon(Icons.error_outline, size: 48, color: Colors.red),
+            const SizedBox(height: 16),
+            Text('Page not found: ${state.uri}'),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => appRouter.go('/'),
+              child: const Text('Go Home'),
+            ),
+          ],
+        ),
+      ),
+    );
+  },
   routes: <RouteBase>[
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
