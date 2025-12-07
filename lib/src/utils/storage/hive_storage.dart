@@ -5,6 +5,8 @@ import 'hive_adapters/hive_adapters.dart';
 /// Storage box names constants
 class StorageBoxes {
   static const String bookmarks = 'bookmarks';
+  static const String movieResponses = 'movie_responses';
+  static const String movieDetails = 'movie_details';
 }
 
 /// Hive storage initialization and management utility
@@ -18,6 +20,8 @@ class HiveStorage {
   /// Register all Hive adapters
   static void _registerAdapters() {
     Hive.registerAdapter(MovieAdapter());
+    Hive.registerAdapter(MovieResponseAdapter());
+    Hive.registerAdapter(MovieDetailsAdapter());
     // Add more adapters here as needed
   }
 

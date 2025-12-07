@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../data/local/movie_local_data_source.dart';
 import '../domain/repository/bookmarks_repository.dart';
 import '../domain/repository/bookmarks_repository_impl.dart';
 import '../domain/repository/movie_repository.dart';
@@ -44,9 +45,17 @@ Future<void> init() async {
     () => ApiClient(getIt<Dio>(), baseUrl: 'https://api.themoviedb.org/3'),
   );
 
+  // Local Data Source
+  getIt.registerLazySingleton<MovieLocalDataSource>(
+    () => MovieLocalDataSource(),
+  );
+
   // Repository
   getIt.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(getIt<ApiClient>()),
+    () => MovieRepositoryImpl(
+      getIt<ApiClient>(),
+      getIt<MovieLocalDataSource>(),
+    ),
   );
 
   // Bookmarks Repository
