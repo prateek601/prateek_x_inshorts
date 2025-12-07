@@ -3,7 +3,7 @@ part of 'details_bloc.dart';
 @freezed
 sealed class DetailsState with _$DetailsState {
   const factory DetailsState({
-    @Default(0) int someValue,
+    MovieDetails? movieDetails,
     @Default(DetailsProgressState.loading()) DetailsProgressState progressState,
   }) = _DetailsState;
 }

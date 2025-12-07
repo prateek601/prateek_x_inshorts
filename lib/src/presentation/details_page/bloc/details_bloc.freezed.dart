@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DetailsState {
 
- int get someValue; DetailsProgressState get progressState;
+ MovieDetails? get movieDetails; DetailsProgressState get progressState;
 /// Create a copy of DetailsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $DetailsStateCopyWith<DetailsState> get copyWith => _$DetailsStateCopyWithImpl<D
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsState&&(identical(other.someValue, someValue) || other.someValue == someValue)&&(identical(other.progressState, progressState) || other.progressState == progressState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsState&&(identical(other.movieDetails, movieDetails) || other.movieDetails == movieDetails)&&(identical(other.progressState, progressState) || other.progressState == progressState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,someValue,progressState);
+int get hashCode => Object.hash(runtimeType,movieDetails,progressState);
 
 @override
 String toString() {
-  return 'DetailsState(someValue: $someValue, progressState: $progressState)';
+  return 'DetailsState(movieDetails: $movieDetails, progressState: $progressState)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $DetailsStateCopyWith<$Res>  {
   factory $DetailsStateCopyWith(DetailsState value, $Res Function(DetailsState) _then) = _$DetailsStateCopyWithImpl;
 @useResult
 $Res call({
- int someValue, DetailsProgressState progressState
+ MovieDetails? movieDetails, DetailsProgressState progressState
 });
 
 
-$DetailsProgressStateCopyWith<$Res> get progressState;
+$MovieDetailsCopyWith<$Res>? get movieDetails;$DetailsProgressStateCopyWith<$Res> get progressState;
 
 }
 /// @nodoc
@@ -62,14 +62,26 @@ class _$DetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? someValue = null,Object? progressState = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? movieDetails = freezed,Object? progressState = null,}) {
   return _then(_self.copyWith(
-someValue: null == someValue ? _self.someValue : someValue // ignore: cast_nullable_to_non_nullable
-as int,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
+movieDetails: freezed == movieDetails ? _self.movieDetails : movieDetails // ignore: cast_nullable_to_non_nullable
+as MovieDetails?,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as DetailsProgressState,
   ));
 }
 /// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MovieDetailsCopyWith<$Res>? get movieDetails {
+    if (_self.movieDetails == null) {
+    return null;
+  }
+
+  return $MovieDetailsCopyWith<$Res>(_self.movieDetails!, (value) {
+    return _then(_self.copyWith(movieDetails: value));
+  });
+}/// Create a copy of DetailsState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -157,10 +169,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int someValue,  DetailsProgressState progressState)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MovieDetails? movieDetails,  DetailsProgressState progressState)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DetailsState() when $default != null:
-return $default(_that.someValue,_that.progressState);case _:
+return $default(_that.movieDetails,_that.progressState);case _:
   return orElse();
 
 }
@@ -178,10 +190,10 @@ return $default(_that.someValue,_that.progressState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int someValue,  DetailsProgressState progressState)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MovieDetails? movieDetails,  DetailsProgressState progressState)  $default,) {final _that = this;
 switch (_that) {
 case _DetailsState():
-return $default(_that.someValue,_that.progressState);}
+return $default(_that.movieDetails,_that.progressState);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,10 +207,10 @@ return $default(_that.someValue,_that.progressState);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int someValue,  DetailsProgressState progressState)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MovieDetails? movieDetails,  DetailsProgressState progressState)?  $default,) {final _that = this;
 switch (_that) {
 case _DetailsState() when $default != null:
-return $default(_that.someValue,_that.progressState);case _:
+return $default(_that.movieDetails,_that.progressState);case _:
   return null;
 
 }
@@ -210,10 +222,10 @@ return $default(_that.someValue,_that.progressState);case _:
 
 
 class _DetailsState implements DetailsState {
-  const _DetailsState({this.someValue = 0, this.progressState = const DetailsProgressState.loading()});
+  const _DetailsState({this.movieDetails, this.progressState = const DetailsProgressState.loading()});
   
 
-@override@JsonKey() final  int someValue;
+@override final  MovieDetails? movieDetails;
 @override@JsonKey() final  DetailsProgressState progressState;
 
 /// Create a copy of DetailsState
@@ -226,16 +238,16 @@ _$DetailsStateCopyWith<_DetailsState> get copyWith => __$DetailsStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailsState&&(identical(other.someValue, someValue) || other.someValue == someValue)&&(identical(other.progressState, progressState) || other.progressState == progressState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailsState&&(identical(other.movieDetails, movieDetails) || other.movieDetails == movieDetails)&&(identical(other.progressState, progressState) || other.progressState == progressState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,someValue,progressState);
+int get hashCode => Object.hash(runtimeType,movieDetails,progressState);
 
 @override
 String toString() {
-  return 'DetailsState(someValue: $someValue, progressState: $progressState)';
+  return 'DetailsState(movieDetails: $movieDetails, progressState: $progressState)';
 }
 
 
@@ -246,11 +258,11 @@ abstract mixin class _$DetailsStateCopyWith<$Res> implements $DetailsStateCopyWi
   factory _$DetailsStateCopyWith(_DetailsState value, $Res Function(_DetailsState) _then) = __$DetailsStateCopyWithImpl;
 @override @useResult
 $Res call({
- int someValue, DetailsProgressState progressState
+ MovieDetails? movieDetails, DetailsProgressState progressState
 });
 
 
-@override $DetailsProgressStateCopyWith<$Res> get progressState;
+@override $MovieDetailsCopyWith<$Res>? get movieDetails;@override $DetailsProgressStateCopyWith<$Res> get progressState;
 
 }
 /// @nodoc
@@ -263,15 +275,27 @@ class __$DetailsStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? someValue = null,Object? progressState = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? movieDetails = freezed,Object? progressState = null,}) {
   return _then(_DetailsState(
-someValue: null == someValue ? _self.someValue : someValue // ignore: cast_nullable_to_non_nullable
-as int,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
+movieDetails: freezed == movieDetails ? _self.movieDetails : movieDetails // ignore: cast_nullable_to_non_nullable
+as MovieDetails?,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as DetailsProgressState,
   ));
 }
 
 /// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MovieDetailsCopyWith<$Res>? get movieDetails {
+    if (_self.movieDetails == null) {
+    return null;
+  }
+
+  return $MovieDetailsCopyWith<$Res>(_self.movieDetails!, (value) {
+    return _then(_self.copyWith(movieDetails: value));
+  });
+}/// Create a copy of DetailsState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -582,30 +606,61 @@ as String?,
 /// @nodoc
 mixin _$DetailsEvent {
 
-
+ int get movieId;
+/// Create a copy of DetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DetailsEventCopyWith<DetailsEvent> get copyWith => _$DetailsEventCopyWithImpl<DetailsEvent>(this as DetailsEvent, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsEvent);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsEvent&&(identical(other.movieId, movieId) || other.movieId == movieId));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,movieId);
 
 @override
 String toString() {
-  return 'DetailsEvent()';
+  return 'DetailsEvent(movieId: $movieId)';
 }
 
 
 }
 
 /// @nodoc
-class $DetailsEventCopyWith<$Res>  {
-$DetailsEventCopyWith(DetailsEvent _, $Res Function(DetailsEvent) __);
+abstract mixin class $DetailsEventCopyWith<$Res>  {
+  factory $DetailsEventCopyWith(DetailsEvent value, $Res Function(DetailsEvent) _then) = _$DetailsEventCopyWithImpl;
+@useResult
+$Res call({
+ int movieId
+});
+
+
+
+
+}
+/// @nodoc
+class _$DetailsEventCopyWithImpl<$Res>
+    implements $DetailsEventCopyWith<$Res> {
+  _$DetailsEventCopyWithImpl(this._self, this._then);
+
+  final DetailsEvent _self;
+  final $Res Function(DetailsEvent) _then;
+
+/// Create a copy of DetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? movieId = null,}) {
+  return _then(_self.copyWith(
+movieId: null == movieId ? _self.movieId : movieId // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
 }
 
 
@@ -684,10 +739,10 @@ return fetchDetails(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchDetails,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int movieId)?  fetchDetails,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FetchDetails() when fetchDetails != null:
-return fetchDetails();case _:
+return fetchDetails(_that.movieId);case _:
   return orElse();
 
 }
@@ -705,10 +760,10 @@ return fetchDetails();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchDetails,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int movieId)  fetchDetails,}) {final _that = this;
 switch (_that) {
 case _FetchDetails():
-return fetchDetails();}
+return fetchDetails(_that.movieId);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -722,10 +777,10 @@ return fetchDetails();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchDetails,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int movieId)?  fetchDetails,}) {final _that = this;
 switch (_that) {
 case _FetchDetails() when fetchDetails != null:
-return fetchDetails();case _:
+return fetchDetails(_that.movieId);case _:
   return null;
 
 }
@@ -737,32 +792,66 @@ return fetchDetails();case _:
 
 
 class _FetchDetails implements DetailsEvent {
-  const _FetchDetails();
+  const _FetchDetails({required this.movieId});
   
 
+@override final  int movieId;
 
-
+/// Create a copy of DetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FetchDetailsCopyWith<_FetchDetails> get copyWith => __$FetchDetailsCopyWithImpl<_FetchDetails>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FetchDetails);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FetchDetails&&(identical(other.movieId, movieId) || other.movieId == movieId));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,movieId);
 
 @override
 String toString() {
-  return 'DetailsEvent.fetchDetails()';
+  return 'DetailsEvent.fetchDetails(movieId: $movieId)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$FetchDetailsCopyWith<$Res> implements $DetailsEventCopyWith<$Res> {
+  factory _$FetchDetailsCopyWith(_FetchDetails value, $Res Function(_FetchDetails) _then) = __$FetchDetailsCopyWithImpl;
+@override @useResult
+$Res call({
+ int movieId
+});
 
 
+
+
+}
+/// @nodoc
+class __$FetchDetailsCopyWithImpl<$Res>
+    implements _$FetchDetailsCopyWith<$Res> {
+  __$FetchDetailsCopyWithImpl(this._self, this._then);
+
+  final _FetchDetails _self;
+  final $Res Function(_FetchDetails) _then;
+
+/// Create a copy of DetailsEvent
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? movieId = null,}) {
+  return _then(_FetchDetails(
+movieId: null == movieId ? _self.movieId : movieId // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
 
 // dart format on

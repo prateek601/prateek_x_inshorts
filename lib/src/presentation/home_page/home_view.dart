@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/movie_response.dart';
+import '../details_page/details_view.dart';
 import 'bloc/home_bloc.dart';
 
 class HomeView extends StatelessWidget {
@@ -126,7 +127,18 @@ class HomeView extends StatelessWidget {
                     );
                   }
 
-                  return _MovieCard(movie: movie);
+                  return _MovieCard(
+                    movie: movie,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<DetailsView>(
+                          builder: (BuildContext context) => DetailsView(
+                            movieId: movie.id,
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
               );
             },
@@ -139,9 +151,10 @@ class HomeView extends StatelessWidget {
 }
 
 class _MovieCard extends StatelessWidget {
-  const _MovieCard({required this.movie});
+  const _MovieCard({required this.movie, this.onTap});
 
   final Movie movie;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -153,9 +166,11 @@ class _MovieCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 4,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
           // Poster
           if (posterUrl != null)
             ClipRRect(
@@ -232,7 +247,8 @@ class _MovieCard extends StatelessWidget {
               ),
             ),
           ),
-        ],
+          ],
+        ),
       ),
     );
   }
