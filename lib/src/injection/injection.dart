@@ -22,6 +22,9 @@ Future<void> init() async {
   // Initialize Hive storage
   await HiveStorage.initialize();
 
+  // Handle first install - clears all data on fresh install
+  await HiveStorage.handleFirstInstall();
+
   // Dio
   getIt.registerLazySingleton<Dio>(() {
     return DioBuilder()

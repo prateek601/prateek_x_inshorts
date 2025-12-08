@@ -389,7 +389,7 @@ $MovieTypeCopyWith<$Res> get movieType {
 /// @nodoc
 mixin _$HomeState {
 
- List<Movie> get movies; int get currentPage; bool get hasMore; bool get isLoadingMore; HomeProgressState get progressState; MovieType get movieType;
+ List<Movie> get movies; int get currentPage; bool get hasMore; bool get isLoadingMore; bool get isLoadMoreError; HomeProgressState get progressState; MovieType get movieType;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -400,16 +400,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.movies, movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.progressState, progressState) || other.progressState == progressState)&&(identical(other.movieType, movieType) || other.movieType == movieType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&const DeepCollectionEquality().equals(other.movies, movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.isLoadMoreError, isLoadMoreError) || other.isLoadMoreError == isLoadMoreError)&&(identical(other.progressState, progressState) || other.progressState == progressState)&&(identical(other.movieType, movieType) || other.movieType == movieType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(movies),currentPage,hasMore,isLoadingMore,progressState,movieType);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(movies),currentPage,hasMore,isLoadingMore,isLoadMoreError,progressState,movieType);
 
 @override
 String toString() {
-  return 'HomeState(movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, progressState: $progressState, movieType: $movieType)';
+  return 'HomeState(movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, isLoadMoreError: $isLoadMoreError, progressState: $progressState, movieType: $movieType)';
 }
 
 
@@ -420,7 +420,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, HomeProgressState progressState, MovieType movieType
+ List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, bool isLoadMoreError, HomeProgressState progressState, MovieType movieType
 });
 
 
@@ -437,12 +437,13 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? progressState = null,Object? movieType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? isLoadMoreError = null,Object? progressState = null,Object? movieType = null,}) {
   return _then(_self.copyWith(
 movies: null == movies ? _self.movies : movies // ignore: cast_nullable_to_non_nullable
 as List<Movie>,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadMoreError: null == isLoadMoreError ? _self.isLoadMoreError : isLoadMoreError // ignore: cast_nullable_to_non_nullable
 as bool,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as HomeProgressState,movieType: null == movieType ? _self.movieType : movieType // ignore: cast_nullable_to_non_nullable
 as MovieType,
@@ -545,10 +546,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  HomeProgressState progressState,  MovieType movieType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  bool isLoadMoreError,  HomeProgressState progressState,  MovieType movieType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState,_that.movieType);case _:
+return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.isLoadMoreError,_that.progressState,_that.movieType);case _:
   return orElse();
 
 }
@@ -566,10 +567,10 @@ return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  HomeProgressState progressState,  MovieType movieType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  bool isLoadMoreError,  HomeProgressState progressState,  MovieType movieType)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState,_that.movieType);}
+return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.isLoadMoreError,_that.progressState,_that.movieType);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -583,10 +584,10 @@ return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  HomeProgressState progressState,  MovieType movieType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  bool isLoadMoreError,  HomeProgressState progressState,  MovieType movieType)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState,_that.movieType);case _:
+return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.isLoadMoreError,_that.progressState,_that.movieType);case _:
   return null;
 
 }
@@ -598,7 +599,7 @@ return $default(_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore
 
 
 class _HomeState implements HomeState {
-  const _HomeState({final  List<Movie> movies = const <Movie>[], this.currentPage = 1, this.hasMore = false, this.isLoadingMore = false, this.progressState = const HomeProgressState.loading(), this.movieType = const MovieType.nowPlaying()}): _movies = movies;
+  const _HomeState({final  List<Movie> movies = const <Movie>[], this.currentPage = 1, this.hasMore = false, this.isLoadingMore = false, this.isLoadMoreError = false, this.progressState = const HomeProgressState.loading(), this.movieType = const MovieType.nowPlaying()}): _movies = movies;
   
 
  final  List<Movie> _movies;
@@ -611,6 +612,7 @@ class _HomeState implements HomeState {
 @override@JsonKey() final  int currentPage;
 @override@JsonKey() final  bool hasMore;
 @override@JsonKey() final  bool isLoadingMore;
+@override@JsonKey() final  bool isLoadMoreError;
 @override@JsonKey() final  HomeProgressState progressState;
 @override@JsonKey() final  MovieType movieType;
 
@@ -624,16 +626,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.progressState, progressState) || other.progressState == progressState)&&(identical(other.movieType, movieType) || other.movieType == movieType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.isLoadMoreError, isLoadMoreError) || other.isLoadMoreError == isLoadMoreError)&&(identical(other.progressState, progressState) || other.progressState == progressState)&&(identical(other.movieType, movieType) || other.movieType == movieType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_movies),currentPage,hasMore,isLoadingMore,progressState,movieType);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_movies),currentPage,hasMore,isLoadingMore,isLoadMoreError,progressState,movieType);
 
 @override
 String toString() {
-  return 'HomeState(movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, progressState: $progressState, movieType: $movieType)';
+  return 'HomeState(movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, isLoadMoreError: $isLoadMoreError, progressState: $progressState, movieType: $movieType)';
 }
 
 
@@ -644,7 +646,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, HomeProgressState progressState, MovieType movieType
+ List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, bool isLoadMoreError, HomeProgressState progressState, MovieType movieType
 });
 
 
@@ -661,12 +663,13 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? progressState = null,Object? movieType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? isLoadMoreError = null,Object? progressState = null,Object? movieType = null,}) {
   return _then(_HomeState(
 movies: null == movies ? _self._movies : movies // ignore: cast_nullable_to_non_nullable
 as List<Movie>,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadMoreError: null == isLoadMoreError ? _self.isLoadMoreError : isLoadMoreError // ignore: cast_nullable_to_non_nullable
 as bool,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as HomeProgressState,movieType: null == movieType ? _self.movieType : movieType // ignore: cast_nullable_to_non_nullable
 as MovieType,

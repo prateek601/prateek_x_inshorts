@@ -8,6 +8,7 @@ sealed class SearchState with _$SearchState {
     @Default(1) int currentPage,
     @Default(false) bool hasMore,
     @Default(false) bool isLoadingMore,
+    @Default(false) bool isLoadMoreError,
     @Default(SearchProgressState.idle()) SearchProgressState progressState,
   }) = _SearchState;
 }

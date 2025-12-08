@@ -94,22 +94,58 @@ class HomeView extends StatelessWidget {
               }
 
               return ListView.builder(
-                itemCount: state.movies.length + (state.isLoadingMore ? 1 : 0),
+                itemCount:
+                    state.movies.length +
+                    (state.isLoadingMore || state.isLoadMoreError ? 1 : 0),
                 itemBuilder: (BuildContext context, int index) {
                   if (index == state.movies.length) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
+
+                    if (state.isLoadingMore) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    if (state.isLoadMoreError) {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              state.movieType.when(
+                                nowPlaying: () {
+                                  context.read<HomeBloc>().add(
+                                    HomeEvent.fetchNowPlayingMovies(
+                                      page: state.currentPage + 1,
+                                    ),
+                                  );
+                                },
+                                trending: () {
+                                  context.read<HomeBloc>().add(
+                                    HomeEvent.fetchTrendingMovies(
+                                      page: state.currentPage + 1,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: const Text('Load More'),
+                          ),
+                        ),
+                      );
+                    }
                   }
 
                   final Movie movie = state.movies[index];
                   final bool isLastItem = index == state.movies.length - 1;
 
                   // Load more when reaching near the end
-                  if (isLastItem && state.hasMore && !state.isLoadingMore) {
+                  if (isLastItem &&
+                      state.hasMore &&
+                      !state.isLoadingMore &&
+                      !state.isLoadMoreError) {
                     state.movieType.when(
                       nowPlaying: () {
                         context.read<HomeBloc>().add(

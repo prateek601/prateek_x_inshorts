@@ -36,7 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       );
     } else if (isLoadingMore) {
-      emit(state.copyWith(isLoadingMore: true));
+      emit(state.copyWith(isLoadingMore: true, isLoadMoreError: false));
     }
 
     // Fetch movies
@@ -45,13 +45,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     result.fold(
       (Exception error) {
-        // Handle error
-        emit(
-          state.copyWith(
-            progressState: HomeProgressState.error(message: error.toString()),
-            isLoadingMore: false,
-          ),
-        );
+        // Handle error - only show error state for initial load (page 1)
+        // For page > 1, just stop loading without changing the screen state
+        if (isInitialLoad) {
+          emit(
+            state.copyWith(
+              progressState: HomeProgressState.error(message: error.toString()),
+              isLoadingMore: false,
+            ),
+          );
+        } else {
+          // For loading more, just stop the loading indicator
+          emit(state.copyWith(isLoadingMore: false, isLoadMoreError: true));
+        }
       },
       (MovieResponse movieResponse) {
         // Handle success
@@ -70,6 +76,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             isLoadingMore: false,
             progressState: const HomeProgressState.loaded(),
             movieType: const MovieType.nowPlaying(),
+            isLoadMoreError: false,
           ),
         );
       },
@@ -101,13 +108,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     result.fold(
       (Exception error) {
-        // Handle error
-        emit(
-          state.copyWith(
-            progressState: HomeProgressState.error(message: error.toString()),
-            isLoadingMore: false,
-          ),
-        );
+        // Handle error - only show error state for initial load (page 1)
+        // For page > 1, just stop loading without changing the screen state
+        if (isInitialLoad) {
+          emit(
+            state.copyWith(
+              progressState: HomeProgressState.error(message: error.toString()),
+              isLoadingMore: false,
+            ),
+          );
+        } else {
+          // For loading more, just stop the loading indicator
+          emit(state.copyWith(isLoadingMore: false, isLoadMoreError: true));
+        }
       },
       (MovieResponse movieResponse) {
         // Handle success

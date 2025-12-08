@@ -64,7 +64,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         ),
       );
     } else if (isLoadingMore) {
-      emit(state.copyWith(isLoadingMore: true));
+      emit(state.copyWith(isLoadingMore: true, isLoadMoreError: false));
     }
 
     // Search movies
@@ -73,13 +73,21 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     result.fold(
       (Exception error) {
-        // Handle error
-        emit(
-          state.copyWith(
-            progressState: SearchProgressState.error(message: error.toString()),
-            isLoadingMore: false,
-          ),
-        );
+        // Handle error - only show error state for initial load (page 1)
+        // For page > 1, just stop loading without changing the screen state
+        if (isInitialLoad) {
+          emit(
+            state.copyWith(
+              progressState: SearchProgressState.error(
+                message: error.toString(),
+              ),
+              isLoadingMore: false,
+            ),
+          );
+        } else {
+          // For loading more, just stop the loading indicator
+          emit(state.copyWith(isLoadingMore: false, isLoadMoreError: true));
+        }
       },
       (MovieResponse movieResponse) {
         // Handle success
@@ -96,6 +104,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             currentPage: movieResponse.page,
             hasMore: hasMore,
             isLoadingMore: false,
+            isLoadMoreError: false,
             progressState: const SearchProgressState.loaded(),
             query: event.query,
           ),

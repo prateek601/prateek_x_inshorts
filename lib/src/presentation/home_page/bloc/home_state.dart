@@ -7,6 +7,7 @@ sealed class HomeState with _$HomeState {
     @Default(1) int currentPage,
     @Default(false) bool hasMore,
     @Default(false) bool isLoadingMore,
+    @Default(false) bool isLoadMoreError,
     @Default(HomeProgressState.loading()) HomeProgressState progressState,
     @Default(MovieType.nowPlaying()) MovieType movieType,
   }) = _HomeState;

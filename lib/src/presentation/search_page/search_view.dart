@@ -158,15 +158,38 @@ class _SearchViewState extends State<SearchView> {
 
                     return ListView.builder(
                       itemCount:
-                          state.movies.length + (state.isLoadingMore ? 1 : 0),
+                          state.movies.length +
+                          (state.isLoadingMore || state.isLoadMoreError
+                              ? 1
+                              : 0),
                       itemBuilder: (BuildContext context, int index) {
                         if (index == state.movies.length) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
+                          if (state.isLoadingMore) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+                          if (state.isLoadMoreError) {
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    context.read<SearchBloc>().add(
+                                      SearchEvent.searchMovies(
+                                        query: state.query,
+                                        page: state.currentPage + 1,
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Load More'),
+                                ),
+                              ),
+                            );
+                          }
                         }
 
                         final Movie movie = state.movies[index];
@@ -176,7 +199,8 @@ class _SearchViewState extends State<SearchView> {
                         // Load more when reaching near the end
                         if (isLastItem &&
                             state.hasMore &&
-                            !state.isLoadingMore) {
+                            !state.isLoadingMore &&
+                            !state.isLoadMoreError) {
                           context.read<SearchBloc>().add(
                             SearchEvent.searchMovies(
                               query: state.query,

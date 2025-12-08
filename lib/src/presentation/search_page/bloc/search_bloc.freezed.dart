@@ -339,7 +339,7 @@ as int,
 /// @nodoc
 mixin _$SearchState {
 
- String get query; List<Movie> get movies; int get currentPage; bool get hasMore; bool get isLoadingMore; SearchProgressState get progressState;
+ String get query; List<Movie> get movies; int get currentPage; bool get hasMore; bool get isLoadingMore; bool get isLoadMoreError; SearchProgressState get progressState;
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -350,16 +350,16 @@ $SearchStateCopyWith<SearchState> get copyWith => _$SearchStateCopyWithImpl<Sear
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other.movies, movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.progressState, progressState) || other.progressState == progressState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other.movies, movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.isLoadMoreError, isLoadMoreError) || other.isLoadMoreError == isLoadMoreError)&&(identical(other.progressState, progressState) || other.progressState == progressState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(movies),currentPage,hasMore,isLoadingMore,progressState);
+int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(movies),currentPage,hasMore,isLoadingMore,isLoadMoreError,progressState);
 
 @override
 String toString() {
-  return 'SearchState(query: $query, movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, progressState: $progressState)';
+  return 'SearchState(query: $query, movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, isLoadMoreError: $isLoadMoreError, progressState: $progressState)';
 }
 
 
@@ -370,7 +370,7 @@ abstract mixin class $SearchStateCopyWith<$Res>  {
   factory $SearchStateCopyWith(SearchState value, $Res Function(SearchState) _then) = _$SearchStateCopyWithImpl;
 @useResult
 $Res call({
- String query, List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, SearchProgressState progressState
+ String query, List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, bool isLoadMoreError, SearchProgressState progressState
 });
 
 
@@ -387,13 +387,14 @@ class _$SearchStateCopyWithImpl<$Res>
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? query = null,Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? progressState = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? query = null,Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? isLoadMoreError = null,Object? progressState = null,}) {
   return _then(_self.copyWith(
 query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
 as String,movies: null == movies ? _self.movies : movies // ignore: cast_nullable_to_non_nullable
 as List<Movie>,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadMoreError: null == isLoadMoreError ? _self.isLoadMoreError : isLoadMoreError // ignore: cast_nullable_to_non_nullable
 as bool,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as SearchProgressState,
   ));
@@ -486,10 +487,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  SearchProgressState progressState)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  bool isLoadMoreError,  SearchProgressState progressState)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
-return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState);case _:
+return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.isLoadMoreError,_that.progressState);case _:
   return orElse();
 
 }
@@ -507,10 +508,10 @@ return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  SearchProgressState progressState)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  bool isLoadMoreError,  SearchProgressState progressState)  $default,) {final _that = this;
 switch (_that) {
 case _SearchState():
-return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState);}
+return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.isLoadMoreError,_that.progressState);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -524,10 +525,10 @@ return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  SearchProgressState progressState)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String query,  List<Movie> movies,  int currentPage,  bool hasMore,  bool isLoadingMore,  bool isLoadMoreError,  SearchProgressState progressState)?  $default,) {final _that = this;
 switch (_that) {
 case _SearchState() when $default != null:
-return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.progressState);case _:
+return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.isLoadingMore,_that.isLoadMoreError,_that.progressState);case _:
   return null;
 
 }
@@ -539,7 +540,7 @@ return $default(_that.query,_that.movies,_that.currentPage,_that.hasMore,_that.i
 
 
 class _SearchState implements SearchState {
-  const _SearchState({this.query = '', final  List<Movie> movies = const <Movie>[], this.currentPage = 1, this.hasMore = false, this.isLoadingMore = false, this.progressState = const SearchProgressState.idle()}): _movies = movies;
+  const _SearchState({this.query = '', final  List<Movie> movies = const <Movie>[], this.currentPage = 1, this.hasMore = false, this.isLoadingMore = false, this.isLoadMoreError = false, this.progressState = const SearchProgressState.idle()}): _movies = movies;
   
 
 @override@JsonKey() final  String query;
@@ -553,6 +554,7 @@ class _SearchState implements SearchState {
 @override@JsonKey() final  int currentPage;
 @override@JsonKey() final  bool hasMore;
 @override@JsonKey() final  bool isLoadingMore;
+@override@JsonKey() final  bool isLoadMoreError;
 @override@JsonKey() final  SearchProgressState progressState;
 
 /// Create a copy of SearchState
@@ -565,16 +567,16 @@ _$SearchStateCopyWith<_SearchState> get copyWith => __$SearchStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.progressState, progressState) || other.progressState == progressState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SearchState&&(identical(other.query, query) || other.query == query)&&const DeepCollectionEquality().equals(other._movies, _movies)&&(identical(other.currentPage, currentPage) || other.currentPage == currentPage)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.isLoadMoreError, isLoadMoreError) || other.isLoadMoreError == isLoadMoreError)&&(identical(other.progressState, progressState) || other.progressState == progressState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(_movies),currentPage,hasMore,isLoadingMore,progressState);
+int get hashCode => Object.hash(runtimeType,query,const DeepCollectionEquality().hash(_movies),currentPage,hasMore,isLoadingMore,isLoadMoreError,progressState);
 
 @override
 String toString() {
-  return 'SearchState(query: $query, movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, progressState: $progressState)';
+  return 'SearchState(query: $query, movies: $movies, currentPage: $currentPage, hasMore: $hasMore, isLoadingMore: $isLoadingMore, isLoadMoreError: $isLoadMoreError, progressState: $progressState)';
 }
 
 
@@ -585,7 +587,7 @@ abstract mixin class _$SearchStateCopyWith<$Res> implements $SearchStateCopyWith
   factory _$SearchStateCopyWith(_SearchState value, $Res Function(_SearchState) _then) = __$SearchStateCopyWithImpl;
 @override @useResult
 $Res call({
- String query, List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, SearchProgressState progressState
+ String query, List<Movie> movies, int currentPage, bool hasMore, bool isLoadingMore, bool isLoadMoreError, SearchProgressState progressState
 });
 
 
@@ -602,13 +604,14 @@ class __$SearchStateCopyWithImpl<$Res>
 
 /// Create a copy of SearchState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? query = null,Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? progressState = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? query = null,Object? movies = null,Object? currentPage = null,Object? hasMore = null,Object? isLoadingMore = null,Object? isLoadMoreError = null,Object? progressState = null,}) {
   return _then(_SearchState(
 query: null == query ? _self.query : query // ignore: cast_nullable_to_non_nullable
 as String,movies: null == movies ? _self._movies : movies // ignore: cast_nullable_to_non_nullable
 as List<Movie>,currentPage: null == currentPage ? _self.currentPage : currentPage // ignore: cast_nullable_to_non_nullable
 as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
+as bool,isLoadMoreError: null == isLoadMoreError ? _self.isLoadMoreError : isLoadMoreError // ignore: cast_nullable_to_non_nullable
 as bool,progressState: null == progressState ? _self.progressState : progressState // ignore: cast_nullable_to_non_nullable
 as SearchProgressState,
   ));
